@@ -39,8 +39,16 @@
     path: /etc/xinetd.d/check_mk
     regexp: '^}'
     insertbefore: '^}'
-    line: 'disable        = no'
- ##   
+    line: 'disable        = no'   
+##       
+- lineinfile:
+    path: /etc/xinetd.d/check_mk
+    state: absent
+    regexp: '}'
+- lineinfile:
+    path: /etc/xinetd.d/check_mk
+    line: '}'    
+##   
 - service:
   name: xinetd
   state: restarted
