@@ -1,0 +1,5 @@
+---
+- hosts: testnodes
+  become: true
+  roles:
+  - monitor
