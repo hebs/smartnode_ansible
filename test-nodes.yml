@@ -1,5 +1,0 @@
----
-- hosts: testnodes
-  become: true
-  roles:
-  - nodes
