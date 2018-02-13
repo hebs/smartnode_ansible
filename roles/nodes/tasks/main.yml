@@ -1,0 +1,142 @@
+---
+#Copy out /etc/hosts file 
+- copy:
+   src: /etc/hosts
+   dest: /etc/hosts
+   owner: root
+   group: root
+   mode: 0644
+   backup: yes
+
+#Harden Node
+##Create ~/smartnode/ dir
+- file: 
+   path: /home/smartadmin/smartnode 
+   state: directory
+   owner: smartadmin
+   group: smartadmin
+##Download files
+#- file:
+#   path: ~/smartnode
+#   state: directory
+#   mode: 0755
+- name: Download makerun.sh
+  get_url:
+   url: https://raw.githubusercontent.com/SmartCash/smartnode/master/makerun.sh
+   dest: /home/smartadmin/smartnode/makerun.sh
+   mode: 0700
+   owner: smartadmin
+   group: smartadmin
+- name: Download checkdaemon.sh
+  get_url:
+   url: https://raw.githubusercontent.com/SmartCash/smartnode/master/checkdaemon.sh
+   dest: /home/smartadmin/smartnode/checkdaemon.sh
+   mode: 0700
+   owner: smartadmin
+   group: smartadmin
+- name: Download upgrade.sh
+  get_url:
+   url: https://raw.githubusercontent.com/SmartCash/smartnode/master/upgrade.sh
+   dest: /home/smartadmin/smartnode/upgrade.sh
+   mode: 0700   
+   owner: smartadmin
+   group: smartadmin
+- name: Download clearlog.sh
+  get_url:
+   url: https://raw.githubusercontent.com/SmartCash/smartnode/master/clearlog.sh
+   dest: /home/smartadmin/smartnode/clearlog.sh
+   mode: 0700
+   owner: smartadmin
+   group: smartadmin
+##Create Cron Jobs
+- cron:
+   name: "makerun"
+   minute: "*/1"
+   hour: "*"
+   day: "*"
+   job: "~/smartnode/makerun.sh"
+   user: smartadmin
+- cron:
+   name: "checkdaemon"
+   minute: "*/30"
+   hour: "*"
+   day: "*"
+   job: "~/smartnode/checkdaemon.sh"
+   user: smartadmin
+#- cron:
+#   name: "upgrade"
+#   minute: "*/120"
+#   hour: "*"
+#   day: "*"
+#   job: "~/smartnode/upgrade.sh"
+#   user: smartadmin
+- cron:
+   name: "clearlog"
+   minute: "0"
+   hour: "0"
+   day: "*/2"
+   job: "~/smartnode/clearlog.sh"
+   user: smartadmin
+#######
+#Remove Cron Jobs
+#- cron:
+#   name: "clearlog"
+#   state: absent
+#- cron:
+#   name: "checkdaemon"
+#   state: absent
+#- cron:
+#   name: "makerun"
+#   state: absent
+#####
+
+##Reload cron
+- service: 
+   name: cron
+   state: restarted
+####
+######
+##Install Cockpit
+#- name: Install cockpit monitoring
+#  apt: name=cockpit state=installed
+######
+##Configure UFW
+- ufw:
+   state: disabled
+- ufw:
+   rule: allow
+   port: 5666
+   proto: tcp
+- ufw:
+   logging: on
+- ufw:
+   state: enabled
+####
+####
+#Install and configure nagios nrpe server and plugins
+- name: Install Python nagios-nrpe-server nagios-plugins
+  apt: name={{item}} state=installed
+  with_items:
+       - python
+       - nagios-nrpe-server
+       - nagios-plugins
+       - monitoring-plugins-basic
+- lineinfile:
+    path: /etc/nagios/nrpe.cfg
+    state: absent
+    regexp: 'server_address=45.32.217.153'
+- lineinfile:
+    path: /etc/nagios/nrpe.cfg
+    line: 'server_address=45.32.217.153'
+- lineinfile:
+   path: /etc/nagios/nrpe.cfg
+   state: absent
+   regexp: 'allowed_hosts=127.0.0.1'
+- lineinfile:
+   path: /etc/nagios/nrpe.cfg
+   line: 'allowed_hosts=127.0.0.1,45.32.217.153'
+- service:
+  name: nagios-nrpe-server
+  state: restarted
+
+

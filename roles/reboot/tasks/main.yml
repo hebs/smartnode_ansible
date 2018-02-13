@@ -1,0 +1,8 @@
+---
+- name: reboot server
+  become: yes
+  shell: sleep 2 && /sbin/shutdown -r now "System reboot"
+  async: 1
+  poll: 0
+- name: Wait for restart
+  local_action: wait_for port=22 host="{{ ansible_ssh_host | default(inventory_hostname) }}"  search_regex=OpenSSH delay=60
