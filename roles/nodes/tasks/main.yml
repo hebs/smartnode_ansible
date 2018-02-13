@@ -16,10 +16,6 @@
    owner: smartadmin
    group: smartadmin
 ##Download files
-#- file:
-#   path: ~/smartnode
-#   state: directory
-#   mode: 0755
 - name: Download makerun.sh
   get_url:
    url: https://raw.githubusercontent.com/SmartCash/smartnode/master/makerun.sh
@@ -96,9 +92,9 @@
    state: restarted
 ####
 ######
-##Install Cockpit
-#- name: Install cockpit monitoring
-#  apt: name=cockpit state=installed
+##Install/Uninstall Cockpit
+- name: Install cockpit monitoring
+  apt: name=cockpit state=absent
 ######
 ##Configure UFW
 - ufw:
@@ -115,28 +111,28 @@
 ####
 #Install and configure nagios nrpe server and plugins
 - name: Install Python nagios-nrpe-server nagios-plugins
-  apt: name={{item}} state=installed
+  apt: name={{item}} state=absent
   with_items:
-       - python
+       #- python
        - nagios-nrpe-server
        - nagios-plugins
        - monitoring-plugins-basic
-- lineinfile:
-    path: /etc/nagios/nrpe.cfg
-    state: absent
-    regexp: 'server_address=45.32.217.153'
-- lineinfile:
-    path: /etc/nagios/nrpe.cfg
-    line: 'server_address=45.32.217.153'
-- lineinfile:
-   path: /etc/nagios/nrpe.cfg
-   state: absent
-   regexp: 'allowed_hosts=127.0.0.1'
-- lineinfile:
-   path: /etc/nagios/nrpe.cfg
-   line: 'allowed_hosts=127.0.0.1,45.32.217.153'
-- service:
-  name: nagios-nrpe-server
-  state: restarted
+#- lineinfile:
+#    path: /etc/nagios/nrpe.cfg
+#    state: absent
+#    regexp: 'server_address=45.32.217.153'
+#- lineinfile:
+#    path: /etc/nagios/nrpe.cfg
+#    line: 'server_address=45.32.217.153'
+#- lineinfile:
+#   path: /etc/nagios/nrpe.cfg
+#   state: absent
+#   regexp: 'allowed_hosts=127.0.0.1'
+#- lineinfile:
+#   path: /etc/nagios/nrpe.cfg
+#   line: 'allowed_hosts=127.0.0.1,45.32.217.153'
+#- service:
+#  name: nagios-nrpe-server
+#  state: restarted
 
 
