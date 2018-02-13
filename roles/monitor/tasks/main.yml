@@ -1,2 +1,62 @@
 ---
+###########################################
+##Configure UFW for Monitoring Applications
+- ufw:
+   state: disabled
+- ufw:
+   rule: allow
+   port: 6556
+   proto: tcp
+- ufw:
+   logging: on
+- ufw:
+   state: enabled
+###########################################
+##Install Monitoring Software
+####
+######Install and configure check-mk-agent for OMD/nagios
+- name: Install check-mk-agent
+  apt: name={{item}} state=installed
+  with_items:
+       - check-mk-agent
+- lineinfile:
+    path: /etc/xinetd.d/check_mk
+    state: absent
+    regexp: 'only_from = 45.32.217.153'
+- lineinfile:
+    path: /etc/xinetd.d/check_mk
+    line: 'only_from = 45.32.217.153'
+- service:
+  name: xinetd
+  state: restarted
 
+######Install and configure nagios nrpe server and plugins
+#- name: Install Python nagios-nrpe-server nagios-plugins
+#  apt: name={{item}} state=installed
+#  with_items:
+#       - python
+#       - nagios-nrpe-server
+#       - nagios-plugins
+#       - monitoring-plugins-basic
+#- lineinfile:
+#    path: /etc/nagios/nrpe.cfg
+#    state: absent
+#    regexp: 'server_address=45.32.217.153'
+#- lineinfile:
+#    path: /etc/nagios/nrpe.cfg
+#    line: 'server_address=45.32.217.153'
+#- lineinfile:
+#   path: /etc/nagios/nrpe.cfg
+#   state: absent
+#   regexp: 'allowed_hosts=127.0.0.1'
+#- lineinfile:
+#   path: /etc/nagios/nrpe.cfg
+#   line: 'allowed_hosts=127.0.0.1,45.32.217.153'
+#- service:
+#  name: nagios-nrpe-server
+#  state: restarted
+###########################################
+######Install Cockpit
+#- name: Install cockpit monitoring
+#  apt: name=cockpit state=installed
+###########################################
