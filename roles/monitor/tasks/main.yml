@@ -18,14 +18,29 @@
 - name: Install check-mk-agent
   apt: name={{item}} state=installed
   with_items:
+       - xinetd
        - check-mk-agent
+##       
 - lineinfile:
     path: /etc/xinetd.d/check_mk
     state: absent
     regexp: 'only_from = 45.32.217.153'
 - lineinfile:
     path: /etc/xinetd.d/check_mk
+    regexp: '^#only_from      = 127.0.0.1 10.0.20.1 10.0.20.2'
+    insertafter: '^#only_from      = 127.0.0.1 10.0.20.1 10.0.20.2'
     line: 'only_from = 45.32.217.153'
+##    
+- lineinfile:
+    path: /etc/xinetd.d/check_mk
+    state: absent
+    regexp: 'disable        = yes'
+- lineinfile:
+    path: /etc/xinetd.d/check_mk
+    regexp: '^}'
+    insertbefore: '^}'
+    line: 'disable        = no'
+ ##   
 - service:
   name: xinetd
   state: restarted
