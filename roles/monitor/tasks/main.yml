@@ -20,7 +20,6 @@
   with_items:
        - xinetd
        - check-mk-agent
-
 ##Removing closing bracket
 - lineinfile:
     path: /etc/xinetd.d/check_mk
@@ -32,7 +31,7 @@
     state: absent
     regexp: 'only_from = 45.32.217.153'
 - lineinfile:
-    path: /etc/nagios/nrpe.cfg
+    path: /etc/xinetd.d/check_mk
     line: 'only_from = 45.32.217.153'    
 ##Remove disable = yes and disable = no if they exist and add disable = no    
 - lineinfile:
@@ -44,7 +43,7 @@
     state: absent
     regexp: 'disable        = no'
 - lineinfile:
-    path: /etc/nagios/nrpe.cfg
+    path: /etc/xinetd.d/check_mk
     line: 'disable        = no'      
 ##Add back ending bracket       
 - lineinfile:
