@@ -1,0 +1,5 @@
+---
+- hosts: nodes
+  become: true
+  roles:
+  - monitor
