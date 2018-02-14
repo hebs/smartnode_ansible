@@ -20,35 +20,37 @@
   with_items:
        - xinetd
        - check-mk-agent
-##       
+
+##Removing closing bracket
+- lineinfile:
+    path: /etc/xinetd.d/check_mk
+    state: absent
+    regexp: '}'
+##Remove only_from server line if it exists and re add it if it exists    
 - lineinfile:
     path: /etc/xinetd.d/check_mk
     state: absent
     regexp: 'only_from = 45.32.217.153'
 - lineinfile:
-    path: /etc/xinetd.d/check_mk
-    regexp: '^#only_from      = 127.0.0.1 10.0.20.1 10.0.20.2'
-    insertafter: '^#only_from      = 127.0.0.1 10.0.20.1 10.0.20.2'
-    line: 'only_from = 45.32.217.153'
-##    
+    path: /etc/nagios/nrpe.cfg
+    line: 'only_from = 45.32.217.153'    
+##Remove disable = yes and disable = no if they exist and add disable = no    
 - lineinfile:
     path: /etc/xinetd.d/check_mk
     state: absent
     regexp: 'disable        = yes'
 - lineinfile:
     path: /etc/xinetd.d/check_mk
-    regexp: '^}'
-    insertbefore: '^}'
-    line: 'disable        = no'   
-##       
-- lineinfile:
-    path: /etc/xinetd.d/check_mk
     state: absent
-    regexp: '}'
+    regexp: 'disable        = no'
+- lineinfile:
+    path: /etc/nagios/nrpe.cfg
+    line: 'disable        = no'      
+##Add back ending bracket       
 - lineinfile:
     path: /etc/xinetd.d/check_mk
     line: '}'    
-##   
+##Restart xinetd   
 - service:
   name: xinetd
   state: restarted
