@@ -51,9 +51,11 @@
     line: '}'    
 ##Restart xinetd   
 - service:
-  name: xinetd
-  state: restarted
-
+   name: xinetd
+   state: stopped
+- service:
+   name: xinetd
+   state: started  
 ######Install and configure nagios nrpe server and plugins
 #- name: Install Python nagios-nrpe-server nagios-plugins
 #  apt: name={{item}} state=installed
