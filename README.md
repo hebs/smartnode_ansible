@@ -2,30 +2,23 @@
 # Ansible Playbooks for Managing Large Smartnode Clusters
 
 ## What is Ansible?
-    Ansible is an opensource automation system. It allows you to write "playbooks", or sets of commands, and execute those playbooks          across a large set of remote hosts, Smartcash Smartnodes in our case.
+Ansible is an opensource automation system. It allows you to write "playbooks", or sets of commands, and execute those playbooks across a large set of remote hosts, Smartcash Smartnodes in our case.
 
 ## How can it help me?
-    If you are like me and thought that the "early bird gets the worm", then you more than likely didnt use the new bash installer, and     therefore, you have to manually run the "node hardening" scripts to add the chron jobs, set max connections, create swap, etc...
+If you are like me and thought that the "early bird gets the worm", then you more than likely didnt use the new bash installer, and therefore, you have to manually run the "node hardening" scripts to add the chron jobs, set max connections, create swap, etc...
 
-    Using the hardening tutorial at smartnodes.cc isnt difficult. However, to do it on large sets of nodes (10's, or even 100's)     can be very time consuming, and can increase the chance of human error. 
+Using the hardening tutorial at smartnodes.cc isnt difficult. However, to do it on large sets of nodes (10's, or even 100's) can be very time consuming, and can increase the chance of human error. 
 
-    By running a single command...
-    
-    "ansible-playbook -K prod-harden.yml"
-    
-    ...it will automatically harden all nodes.
+By running a single command... "ansible-playbook -K prod-harden.yml"...it will automatically harden all nodes.
     
 ## Notes about my environment: 
-      I have one server with the hostname of "main", one with a hostname of "testnode1", and all of my nodes are named "node1", etc...         I use "main" as a monitoring server, as well as the server which I run all of my playbooks from.
+I have one server with the hostname of "main", one with a hostname of "testnode1", and all of my nodes are named "node1", etc...
+I use "main" as a monitoring server, as well as the server which I run all of my playbooks from.
       
 ## Installing and Configuring Ansible:
-      1) 
+1) 
      
-     
-
-
-
-## Current Playbooks:
+     ## Current Playbooks:
   ### Harden: 
       #### Description: 
             This playbook currently creates the /smartnode/ directory, downloads the makerun.sh, checkdaemon.sh, and clearlog.sh                     scripts and creates the cronjobs.
