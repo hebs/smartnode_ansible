@@ -13,12 +13,14 @@ By running a single command... "ansible-playbook -K prod-harden.yml"...it will a
     
 ## Notes about my environment: 
 I have one server with the hostname of "main", one with a hostname of "testnode1", and all of my nodes are named "node1", etc...
+
 I use "main" as a monitoring server, as well as the server which I run all of my playbooks from.
+
+I created my first node using the original pdf tutorial, which uses the "smartadmin" user. I created a snapshot of that node, and now when I want to create more nodes, I simply create a new vps using that snapshot. 
       
 ## Installing and Configuring Ansible:
-1) 
      
-     ## Current Playbooks:
+## Current Playbooks:
   ### Harden: 
       #### Description: 
             This playbook currently creates the /smartnode/ directory, downloads the makerun.sh, checkdaemon.sh, and clearlog.sh                     scripts and creates the cronjobs.
