@@ -9,7 +9,7 @@ If you are like me and thought that the "early bird gets the worm", then you mor
 
 Using the hardening tutorial at smartnodes.cc isnt difficult. However, to do it on large sets of nodes (10's, or even 100's) can be very time consuming, and can increase the chance of human error. 
 
-By running a single command... "ansible-playbook -K prod-harden.yml"...it will automatically harden all nodes.
+By running a single command... `ansible-playbook -K prod-harden.yml`...it will automatically harden all nodes.
     
 ## Notes about my environment: 
 I have one server with the hostname of "main", one with a hostname of "testnode1", and all of my nodes are named "node1", etc...
