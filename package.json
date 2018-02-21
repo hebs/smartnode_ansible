@@ -1,25 +1,23 @@
 {
   "name": "nodar-client",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "private": true,
-  "dependencies": {
-    "@feathersjs/client": "^3.4.2",
-    "history": "^4.7.2",
-    "qhistory": "^1.0.0",
-    "qs": "^6.5.1",
-    "react": "^16.2.0",
-    "react-autobind": "^1.0.6",
-    "react-bootstrap": "^0.32.1",
-    "react-dom": "^16.2.0",
-    "react-router-dom": "^4.2.2",
-    "react-scripts": "1.1.1",
-    "socket.io-client": "^2.0.4",
-    "toastr": "^2.1.4"
-  },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "start": "node ./bin/www",
+    "watch": "nodemon --watch app --watch ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "~1.18.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "ejs": "~2.5.7",
+    "ejs-mate": "^2.3.0",
+    "express": "~4.15.5",
+    "morgan": "~1.9.0",
+    "node-sass-middleware": "0.9.8",
+    "serve-favicon": "~2.4.5"
+  },
+  "devDependencies": {
+    "nodemon": "^1.15.1"
   }
 }
