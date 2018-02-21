@@ -22,6 +22,10 @@
       document.write('<link rel="stylesheet" id="theme-style" href="css/modular-admin/app.css">');
     }
   </script>
+<!-- Global nodar config variable setup-->
+<script>
+  window.nodar = {};
+</script>
 </head>
 
 <body>
@@ -58,6 +62,9 @@
 
   <!-- Add Vue -->
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+
+  <!-- Initialize the feathers api and authentication -->
+  <script src="js/feathers/api.js"></script>
 </body>
 
 </html>
