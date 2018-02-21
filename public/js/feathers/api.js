@@ -9,7 +9,12 @@ const setupApi = function(nodar, feathers, io) {
   api.configure(feathers.authentication({ storage: window.localStorage }));
 
   const ensureAuthenticated = () => {
-    return api.authenticate()
+    //return api.authenticate()
+    return api.authenticate({
+      strategy: 'local',
+      email: 'techtbeau@gmail.com',
+      password: 'password'
+    })
       .then(success => {
         return api;
       })
