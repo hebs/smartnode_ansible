@@ -65,6 +65,9 @@
 
   <!-- Initialize the feathers api and authentication -->
   <script src="js/feathers/api.js"></script>
+
+  <!-- Add a place where each view's custom JS will go, notice it as after everything else -->
+  <%- block('javascript') %>
 </body>
 
 </html>

@@ -1,2 +1,71 @@
 <% layout('./layouts/main') -%>
-  <h1>I am the  template</h1>
+  <section class="section" id="dashboardPage">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-block">
+            <div class="card-title-block">
+              <h3 class="title"> Smart Nodes </h3>
+            </div>
+            <section class="example">
+              <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Table heading</th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+<% block('javascript').append(`
+  <script>
+    const dashboardPage = function(Vue, nodar) {
+
+      nodar.ensureAuthenticated().then((api) => {
+
+        const component = new Vue({
+         el: "#dashboardPage",
+         data: {
+           smartNodes: [],
+         },
+         mounted: function() {
+           this.getSmartNodes();
+         },
+         methods: {
+           getSmartNodes: function() {
+             api.service('smart-nodes').find()
+              .then(results => {
+                console.log(results.data)
+                this.smartNodes = results.data;
+              })
+              .catch(err => console.log(err));
+           }
+         }
+       });
+
+      });
+
+    }(Vue, window.nodar)
+  </script>
+`) %>
