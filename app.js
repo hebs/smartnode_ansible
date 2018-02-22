@@ -9,6 +9,7 @@ const engine = require('ejs-mate');
 
 const index = require('./routes/index');
 const smartNodes = require('./routes/smart-nodes');
+const exampleRoute = require('./routes/example');
 
 const app = express();
 
@@ -33,6 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/smart-nodes', smartNodes);
+app.use('/example', exampleRoute);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
