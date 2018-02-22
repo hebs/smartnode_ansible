@@ -44,7 +44,7 @@
   <script>
     (function(Vue, nodar) {
 
-      nodar.ensureAuthenticated().then((api) => {
+      nodar.api.on('authenticated', () => {
 
         // Before we run anything, ensure the user is
         // authenticated with the API, otherwise they
@@ -63,7 +63,7 @@
           },
           methods: {
             getSmartNodes: function() {
-              api.service('smart-nodes').find()
+              nodar.api.service('smart-nodes').find()
                 .then(results => {
                   this.smartNodes = results.data;
                   this.isLoading = false;

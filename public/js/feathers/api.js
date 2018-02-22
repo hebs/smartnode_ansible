@@ -10,26 +10,19 @@
   //api.configure(feathers.rest('http://feathers-api.com').fetch(window.fetch));
   api.configure(feathers.authentication({ storage: window.localStorage }));
 
-  const token = window.localStorage.getItem('feathers-jwt');
-  console.log(token)
-
-  const ensureAuthenticated = () => {
-    //return api.authenticate()
-    return api.authenticate({
-      strategy: 'local',
-      email: 'techtbeau@gmail.com',
-      password: 'password'
+  api.authenticate({
+    strategy: 'local',
+    email: 'techtbeau@gmail.com',
+    password: 'password'
+  })
+    .then(response => {
+      window.nodar.api = api;
     })
-      .then(response => {
-        api.set('user', response.user);
-        return api;
-      })
-      .catch(err => {
-        console.log(err)
-        //window.location.href = '/login'
-      })
-  };
+    .catch(err => {
+      console.log(err)
+      window.location.href = '/login'
+    })
 
-  window.nodar.ensureAuthenticated = ensureAuthenticated;
+  window.nodar.api = api;
 
 } (window.nodar, feathers, io));

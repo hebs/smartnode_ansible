@@ -110,7 +110,7 @@
   <script>
     (function(Vue, nodar) {
 
-      nodar.ensureAuthenticated().then((api) => {
+       nodar.api.on('authenticated', ({ user }) => {
 
         // Before we run anything, ensure the user is
         // authenticated with the API, otherwise they
@@ -121,7 +121,7 @@
         const component = new Vue({
           el: "#mainHeader",
           data: {
-            user: api.get('user'),
+            user: user,
           }
         });
 
