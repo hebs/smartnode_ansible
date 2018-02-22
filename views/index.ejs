@@ -42,14 +42,15 @@
 
 <% block('javascript').append(`
   <script>
-    const dashboardPage = function() {
-      // `Vue` and `nodar` are exposed on the global namespace
+    (function(Vue, nodar) {
 
-      // Before we ren anything, ensure the user is
-      // authenticated with the API, otherwise they
-      // will be kicked to /login. This returns an
-      // instance of the feathers client to talk to the feathers api
       nodar.ensureAuthenticated().then((api) => {
+
+        // Before we run anything, ensure the user is
+        // authenticated with the API, otherwise they
+        // will be kicked to /login. This returns an
+        // instance of the feathers client to talk to the
+        // feathers api
 
         const component = new Vue({
           el: "#dashboardPage",
@@ -74,6 +75,6 @@
 
       });
 
-    }()
+    }(Vue, window.nodar));
   </script>
 `) %>

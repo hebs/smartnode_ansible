@@ -1,4 +1,4 @@
-<header class="header">
+<header id="mainHeader" class="header">
   <div class="header-block header-block-collapse d-lg-none d-xl-none">
     <button class="collapse-btn" id="sidebar-collapse-btn">
       <i class="fa fa-bars"></i>
@@ -13,7 +13,7 @@
       </div>
     </form>
   </div>
-  <div class="header-block header-block-buttons">
+  <!-- <div class="header-block header-block-buttons">
     <a href="https://github.com/modularcode/modular-admin-html" class="btn btn-sm header-btn">
       <i class="fa fa-github-alt"></i>
       <span>View on GitHub</span>
@@ -26,7 +26,7 @@
       <i class="fa fa-cloud-download"></i>
       <span>Download .zip</span>
     </a>
-  </div>
+  </div> -->
   <div class="header-block header-block-nav">
     <ul class="nav-profile">
       <li class="notifications new">
@@ -88,7 +88,7 @@
       <li class="profile dropdown">
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
           <div class="img" style="background-image: url('https://avatars3.githubusercontent.com/u/3959008?v=3&s=40')"> </div>
-          <span class="name"> John Doe </span>
+          <span class="name"> {{ user.email }} </span>
         </a>
         <div class="dropdown-menu profile-dropdown-menu" aria-labelledby="dropdownMenu1">
           <a class="dropdown-item" href="#">
@@ -105,3 +105,28 @@
     </ul>
   </div>
 </header>
+
+<% block('javascript').append(`
+  <script>
+    (function(Vue, nodar) {
+
+      nodar.ensureAuthenticated().then((api) => {
+
+        // Before we run anything, ensure the user is
+        // authenticated with the API, otherwise they
+        // will be kicked to /login. This returns an
+        // instance of the feathers client to talk to the
+        // feathers api
+
+        const component = new Vue({
+          el: "#mainHeader",
+          data: {
+            user: api.get('user'),
+          }
+        });
+
+      });
+
+    }(Vue, window.nodar));
+  </script>
+`) %>

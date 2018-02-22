@@ -1,12 +1,17 @@
-const setupApi = function(nodar, feathers, io) {
+(function(nodar, feathers, io) {
+
+  const apiRoot = 'http://localhost:3030';
 
   const api = feathers();
-  const socket = io('http://localhost:3030', {
+  const socket = io(apiRoot, {
     transports: ['websocket']
   });
-
   api.configure(feathers.socketio(socket));
+  //api.configure(feathers.rest('http://feathers-api.com').fetch(window.fetch));
   api.configure(feathers.authentication({ storage: window.localStorage }));
+
+  const token = window.localStorage.getItem('feathers-jwt');
+  console.log(token)
 
   const ensureAuthenticated = () => {
     //return api.authenticate()
@@ -15,15 +20,16 @@ const setupApi = function(nodar, feathers, io) {
       email: 'techtbeau@gmail.com',
       password: 'password'
     })
-      .then(success => {
+      .then(response => {
+        api.set('user', response.user);
         return api;
       })
       .catch(err => {
         console.log(err)
-        window.location.href = '/login'
+        //window.location.href = '/login'
       })
   };
 
   window.nodar.ensureAuthenticated = ensureAuthenticated;
 
-} (window.nodar, feathers, io);
+} (window.nodar, feathers, io));
