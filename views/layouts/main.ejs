@@ -4,22 +4,22 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title> ModularAdmin - Free Dashboard Theme | HTML Version </title>
+  <title> Nodar SmartCash </title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- <link rel="apple-touch-icon" href="apple-touch-icon.png"> -->
   <!-- Place favicon.ico in the root directory -->
-  <link rel="stylesheet" href="css/modular-admin/vendor.css">
+  <link rel="stylesheet" href="/css/modular-admin/vendor.css">
   <!-- Theme initialization -->
   <script>
     var themeSettings = (localStorage.getItem('themeSettings')) ? JSON.parse(localStorage.getItem('themeSettings')) :
       {};
     var themeName = themeSettings.themeName || '';
     if (themeName) {
-      document.write('<link rel="stylesheet" id="theme-style" href="css/modular-admin/app-' + themeName + '.css">');
+      document.write('<link rel="stylesheet" id="theme-style" href="/css/modular-admin/app-' + themeName + '.css">');
     }
     else {
-      document.write('<link rel="stylesheet" id="theme-style" href="css/modular-admin/app.css">');
+      document.write('<link rel="stylesheet" id="theme-style" href="/css/modular-admin/app.css">');
     }
   </script>
 <!-- Global nodar config variable setup-->
@@ -34,11 +34,9 @@
       <% include ../includes/header %>
       <% include ../includes/sidebar %>
 
-      <article class="content dashboard-page">
-        <%- body -%>
-      </article>
-      <% include ../includes/footer %>
+      <%- body -%>
 
+      <% include ../includes/footer %>
 
     </div>
   </div>
@@ -53,8 +51,8 @@
   <!-- Modual Admin wraps up the jQuery and BS javascript for us along
     with javascript for the charts and some other custom stuff this template does
   -->
-  <script src="js/modular-admin/vendor.js"></script>
-  <script src="js/modular-admin/modular-admin.js"></script>
+  <script src="/js/modular-admin/vendor.js"></script>
+  <script src="/js/modular-admin/modular-admin.js"></script>
 
   <!-- Add feathers -->
   <script type="text/javascript" src="//unpkg.com/socket.io-client@1.7.3/dist/socket.io.js"></script>
@@ -64,7 +62,7 @@
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
 
   <!-- Initialize the feathers api and authentication -->
-  <script src="js/feathers/api.js"></script>
+  <script src="/js/feathers/api.js"></script>
 
   <!-- Add a place where each view's custom JS will go, notice it as after everything else -->
   <%- block('javascript') %>

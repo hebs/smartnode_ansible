@@ -1341,10 +1341,10 @@ $(function () {
 	function setThemeState() {
 		// set theme type
 		if (themeSettings.themeName) {
-			$styleLink.attr('href', 'css/modular-admin/app-' + themeSettings.themeName + '.css');
+			$styleLink.attr('href', '/css/modular-admin/app-' + themeSettings.themeName + '.css');
 		}
 		else {
-			$styleLink.attr('href', 'css/modular-admin/app.css');
+			$styleLink.attr('href', '/css/modular-admin/app.css');
 		}
 
 		// App classes
@@ -1433,4 +1433,4 @@ $(function() {
 NProgress.start();
 
 // end loading bar
-NProgress.done();
+//NProgress.done();

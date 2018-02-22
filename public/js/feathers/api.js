@@ -17,6 +17,7 @@
   })
     .then(response => {
       window.nodar.api = api;
+      NProgress.done();
     })
     .catch(err => {
       console.log(err)

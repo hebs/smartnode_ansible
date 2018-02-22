@@ -1,4 +1,5 @@
 <% layout('./layouts/main') -%>
+<article class="content dashboard-page">
 <section class="section d-none" id="dashboardPage" v-bind:class="{ 'd-block': !isLoading }">
     <div class="row">
       <div class="col-md-12">
@@ -38,6 +39,7 @@
       </div>
     </div>
   </section>
+  </article>
 
 
 <% block('javascript').append(`

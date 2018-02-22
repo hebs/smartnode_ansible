@@ -8,7 +8,7 @@ const sassMiddleware = require('node-sass-middleware');
 const engine = require('ejs-mate');
 
 const index = require('./routes/index');
-const users = require('./routes/users');
+const smartNodes = require('./routes/smart-nodes');
 
 const app = express();
 
@@ -32,7 +32,7 @@ app.use(sassMiddleware({
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/users', users);
+app.use('/smart-nodes/', smartNodes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
