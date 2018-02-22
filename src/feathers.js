@@ -26,6 +26,20 @@ const auth = {
       if (jwt) {
         console.log('Token found, authorizing')
         // return api.authenticate()
+        return api.authenticate()
+          .then((response) => {
+            console.log('Authorized')
+            this.isAuthorized = true
+            return true
+          })
+          .catch((err) => {
+            console.log(err)
+            this.isAuthorized = false
+            return false
+          })
+      } else {
+        console.log('no token')
+        // temp code to bypass auth
         return api.authenticate({
           strategy: 'local',
           email: 'techtbeau@gmail.com',
@@ -41,11 +55,9 @@ const auth = {
             this.isAuthorized = false
             return false
           })
-      } else {
-        console.log('no token')
-        return new Promise((resolve, reject) => {
-          reject(new Error('There is no JWT'))
-        })
+        // return new Promise((resolve, reject) => {
+        //   reject(new Error('There is no JWT'))
+        // })
       }
     } else {
       console.log('Already authorized')
