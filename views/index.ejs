@@ -44,7 +44,7 @@
 
 <% block('javascript').append(`
   <script>
-    (function(Vue, nodar) {
+    (function() {
 
       nodar.api.on('authenticated', () => {
 
@@ -77,6 +77,6 @@
 
       });
 
-    }(Vue, window.nodar));
+    }());
   </script>
 `) %>

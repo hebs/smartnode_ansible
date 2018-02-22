@@ -10,6 +10,7 @@
   //api.configure(feathers.rest('http://feathers-api.com').fetch(window.fetch));
   api.configure(feathers.authentication({ storage: window.localStorage }));
 
+  // api.authenticate()
   api.authenticate({
     strategy: 'local',
     email: 'techtbeau@gmail.com',

@@ -30,7 +30,7 @@
 
   <% block('javascript').append(`
   <script>
-    (function(Vue, nodar, toastr) {
+    (function() {
 
       nodar.api.on('authenticated', () => {
 
@@ -62,6 +62,6 @@
 
       });
 
-    }(Vue, window.nodar, toastr));
+    }());
   </script>
 `) %>
