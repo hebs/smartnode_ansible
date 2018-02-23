@@ -14,9 +14,8 @@
 
 ###################################
 #Kill smartcashd
-
-
-
+- name: Kill smartcashd
+  shell: sudo killall smartcashd
 ####----------------------------###
 
 ###################################
