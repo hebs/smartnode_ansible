@@ -19,7 +19,7 @@
 ###################################
 #Kill smartcashd
 - name: Kill smartcashd
-  shell: killall smartcashd
+  shell: smartcash-cli stop
 ####----------------------------###
 
 ###################################
