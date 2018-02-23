@@ -10,6 +10,10 @@
 - cron:
    name: "makerun"
    state: absent
+#Reload cron
+- service: 
+   name: cron
+   state: restarted      
 ####----------------------------###
 
 ###################################
@@ -44,13 +48,13 @@
 
 ###################################
 #Recreate Jobs
-##Create ~/smartnode/ dir
+#Create ~/smartnode/ dir
 - file: 
    path: /home/smartadmin/smartnode 
    state: directory
    owner: smartadmin
    group: smartadmin
-##Download files
+#Download files
 - name: Download makerun.sh
   get_url:
    url: https://raw.githubusercontent.com/SmartCash/smartnode/master/makerun.sh
@@ -79,7 +83,7 @@
    mode: 0700
    owner: smartadmin
    group: smartadmin
-##Create Cron Jobs
+#Create Cron Jobs
 - cron:
    name: "makerun"
    minute: "*/1"
@@ -108,7 +112,7 @@
    day: "*/2"
    job: "~/smartnode/clearlog.sh"
    user: smartadmin
-##Reload cron
+#Reload cron
 - service: 
    name: cron
    state: restarted   
