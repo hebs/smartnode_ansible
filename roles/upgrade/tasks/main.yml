@@ -1,2 +1,111 @@
 ---
+###################################
+#Remove Cron Jobs
+- cron:
+   name: "clearlog"
+   state: absent
+- cron:
+   name: "checkdaemon"
+   state: absent
+- cron:
+   name: "makerun"
+   state: absent
+####----------------------------###
+
+###################################
+#Kill smartcashd
+
+
+
+####----------------------------###
+
+###################################
+#Back up files
+
+
+
+####----------------------------###
+
+###################################
+#Update
+- name: apt-get update
+  apt:
+    update_cache: yes
+####----------------------------###
+
+###################################
+#Upgrade
+- name: Upgrade all packages to the latest version
+  apt:
+    name: "*"
+    state: latest
+####----------------------------###
+
+###################################
+#Recreate Jobs
+##Create ~/smartnode/ dir
+- file: 
+   path: /home/smartadmin/smartnode 
+   state: directory
+   owner: smartadmin
+   group: smartadmin
+##Download files
+- name: Download makerun.sh
+  get_url:
+   url: https://raw.githubusercontent.com/SmartCash/smartnode/master/makerun.sh
+   dest: /home/smartadmin/smartnode/makerun.sh
+   mode: 0700
+   owner: smartadmin
+   group: smartadmin
+- name: Download checkdaemon.sh
+  get_url:
+   url: https://raw.githubusercontent.com/SmartCash/smartnode/master/checkdaemon.sh
+   dest: /home/smartadmin/smartnode/checkdaemon.sh
+   mode: 0700
+   owner: smartadmin
+   group: smartadmin
+- name: Download upgrade.sh
+  get_url:
+   url: https://raw.githubusercontent.com/SmartCash/smartnode/master/upgrade.sh
+   dest: /home/smartadmin/smartnode/upgrade.sh
+   mode: 0700   
+   owner: smartadmin
+   group: smartadmin
+- name: Download clearlog.sh
+  get_url:
+   url: https://raw.githubusercontent.com/SmartCash/smartnode/master/clearlog.sh
+   dest: /home/smartadmin/smartnode/clearlog.sh
+   mode: 0700
+   owner: smartadmin
+   group: smartadmin
+##Create Cron Jobs
+- cron:
+   name: "makerun"
+   minute: "*/1"
+   hour: "*"
+   day: "*"
+   job: "~/smartnode/makerun.sh"
+   user: smartadmin
+- cron:
+   name: "checkdaemon"
+   minute: "*/30"
+   hour: "*"
+   day: "*"
+   job: "~/smartnode/checkdaemon.sh"
+   user: smartadmin
+#- cron:
+#   name: "upgrade"
+#   minute: "*/120"
+#   hour: "*"
+#   day: "*"
+#   job: "~/smartnode/upgrade.sh"
+#   user: smartadmin
+- cron:
+   name: "clearlog"
+   minute: "0"
+   hour: "0"
+   day: "*/2"
+   job: "~/smartnode/clearlog.sh"
+   user: smartadmin
+####----------------------------###
 
