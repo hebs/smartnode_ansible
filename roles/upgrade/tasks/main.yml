@@ -20,9 +20,11 @@
 
 ###################################
 #Back up files
-
-
-
+- name: Backup Files
+  shell: cp -r /home/smartadmin/.smartcash /home/smartadmin/smartcashbackup
+#  with_items:
+#   - "index.html"
+#   - "static/"
 ####----------------------------###
 
 ###################################
@@ -106,5 +108,9 @@
    day: "*/2"
    job: "~/smartnode/clearlog.sh"
    user: smartadmin
+##Reload cron
+- service: 
+   name: cron
+   state: restarted   
 ####----------------------------###
 
