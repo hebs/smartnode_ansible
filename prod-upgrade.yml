@@ -1,0 +1,10 @@
+---
+- name: Upgrade Prod Nodes
+  hosts: nodes
+  remote_user: smartadmin
+  become: True
+  become_method: sudo
+  become_user: root
+  gather_facts: True
+  roles:
+   - upgrade
