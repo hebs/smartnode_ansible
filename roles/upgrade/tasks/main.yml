@@ -61,8 +61,11 @@
 #Upgrade
 - name: apt-get upgrade
   apt:
-    name: "*"
-    state: latest
+    upgrade: dist
+#- name: apt-get upgrade
+#  apt:
+#    name: "*"
+#    state: latest
 ####----------------------------###
 
 ###################################
