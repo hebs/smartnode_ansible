@@ -24,7 +24,15 @@
 
 ###################################
 #Delete peers.dat
+- find:
+    paths: "/home/smartadmin/.smartcash/"
+    patterns: "peers.dat*"
+  register: result
 
+- file:
+    path: "{{item.path}}" #correction code
+    state: absent
+  with_items: result.files
 ####----------------------------###
 
 ###################################
