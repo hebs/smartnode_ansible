@@ -1,10 +1,5 @@
 ---
-- name: Upgrade Test Nodes
-  hosts: testnodes
-  remote_user: smartadmin
-  become: True
-  become_method: sudo
-  become_user: root
-  gather_facts: True
+- hosts: testnodes
+  become: true
   roles:
-   - upgrade
+  - upgrade
