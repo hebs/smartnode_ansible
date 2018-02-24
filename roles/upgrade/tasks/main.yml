@@ -23,6 +23,15 @@
 ####----------------------------###
 
 ###################################
+#Back up files
+- name: Backup Files
+  shell: cp -r /home/smartadmin/.smartcash /home/smartadmin/smartcashbackup
+#  with_items:
+#   - "index.html"
+#   - "static/"
+####----------------------------###
+
+###################################
 #Delete peers.dat
 - find:
     paths: "/home/smartadmin/.smartcash/"
@@ -33,15 +42,6 @@
     path: "{{item.path}}" #correction code
     state: absent
   with_items: result.files
-####----------------------------###
-
-###################################
-#Back up files
-- name: Backup Files
-  shell: cp -r /home/smartadmin/.smartcash /home/smartadmin/smartcashbackup
-#  with_items:
-#   - "index.html"
-#   - "static/"
 ####----------------------------###
 
 ###################################
