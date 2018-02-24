@@ -35,15 +35,19 @@
 
 ###################################
 #Delete peers.dat
-- find:
-    paths: "/home/smartadmin/.smartcash/"
-    patterns: "peers.dat*"
-  register: result
-
-- file:
-    path: "{{item.path}}" #correction code
-    state: absent
-  with_items: result.files
+- name: Delete peers.dat
+  command: rm /home/smartadmin/.smartcash/peers.dat*
+#  become: true
+#  become_user: smartadmin
+#- find:
+#    paths: "/home/smartadmin/.smartcash/"
+#    patterns: "peers.dat*"
+#  register: result
+#
+#- file:
+#   path: "{{item.path}}" 
+#   state: absent
+#   with_items: result.files
 ####----------------------------###
 
 ###################################
