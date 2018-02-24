@@ -28,26 +28,12 @@
 #Back up files
 - name: Backup Files
   command: cp /home/smartadmin/.smartcash/smartcash.conf /home/smartadmin/
-#  with_items:
-#   - "index.html"
-#   - "static/"
 ####----------------------------###
 
 ###################################
 #Delete peers.dat
 - name: Delete peers.dat
   shell: rm -rf /home/smartadmin/.smartcash/peers.dat*
-#  become: true
-#  become_user: smartadmin
-#- find:
-#    paths: "/home/smartadmin/.smartcash/"
-#    patterns: "peers.dat*"
-#  register: result
-#
-#- file:
-#   path: "{{item.path}}" 
-#   state: absent
-#   with_items: result.files
 ####----------------------------###
 
 ###################################
@@ -62,10 +48,6 @@
 - name: apt-get upgrade
   apt:
     upgrade: dist
-#- name: apt-get upgrade
-#  apt:
-#    name: "*"
-#    state: latest
 ####----------------------------###
 
 ###################################
@@ -120,13 +102,6 @@
    day: "*"
    job: "~/smartnode/checkdaemon.sh"
    user: smartadmin
-#- cron:
-#   name: "upgrade"
-#   minute: "*/120"
-#   hour: "*"
-#   day: "*"
-#   job: "~/smartnode/upgrade.sh"
-#   user: smartadmin
 - cron:
    name: "clearlog"
    minute: "0"
