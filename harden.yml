@@ -1,5 +1,0 @@
----
-- hosts: harden
-  become: true
-  roles:
-  - nodes
