@@ -1,5 +1,6 @@
 ---
 - hosts: testnodes
   become: true
+  become_user: smartadmin
   roles:
   - upgrade
