@@ -1,5 +1,5 @@
 ---
-- hosts: testnodes
+- hosts: nodes
   become: true
   roles:
   - upgrade
