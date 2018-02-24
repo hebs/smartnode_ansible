@@ -23,6 +23,11 @@
 ####----------------------------###
 
 ###################################
+#Delete peers.dat
+
+####----------------------------###
+
+###################################
 #Back up files
 - name: Backup Files
   shell: cp -r /home/smartadmin/.smartcash /home/smartadmin/smartcashbackup
