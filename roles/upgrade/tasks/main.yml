@@ -19,13 +19,15 @@
 ###################################
 #Kill smartcashd
 - name: Kill smartcashd
-  shell: smartcash-cli stop
+  command: smartcash-cli stop
+  become: true
+  become_user: smartadmin
 ####----------------------------###
 
 ###################################
 #Back up files
 - name: Backup Files
-  shell: cp -r /home/smartadmin/.smartcash /home/smartadmin/smartcashbackup
+  shell: cp /home/smartadmin/.smartcash/smartcash.conf /home/smartadmin/smartcashbackup/smartcash.conf
 #  with_items:
 #   - "index.html"
 #   - "static/"
