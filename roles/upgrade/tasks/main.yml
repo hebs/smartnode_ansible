@@ -27,7 +27,7 @@
 ###################################
 #Back up files
 - name: Backup Files
-  shell: cp /home/smartadmin/.smartcash/smartcash.conf /home/smartadmin/smartcashbackup/smartcash.conf
+  command: cp /home/smartadmin/.smartcash/smartcash.conf /home/smartadmin/
 #  with_items:
 #   - "index.html"
 #   - "static/"
