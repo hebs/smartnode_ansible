@@ -4,12 +4,15 @@
 - cron:
    name: "clearlog"
    state: absent
+   user: smartadmin
 - cron:
    name: "checkdaemon"
    state: absent
+   user: smartadmin
 - cron:
    name: "makerun"
    state: absent
+   user: smartadmin
 #Reload cron
 - service: 
    name: cron
